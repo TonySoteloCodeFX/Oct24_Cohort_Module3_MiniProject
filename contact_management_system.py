@@ -145,6 +145,6 @@ def run_program():
 clr()
 print("-" * 50)
 print(f"{Fore.GREEN}{intro}{Style.RESET_ALL}")
-print(f"{Fore.GREEN}Welcome to the Contact Management System{Style.RESET_ALL}\n")
+print(f"{Fore.GREEN}Welcome To The\nContact Management System{Style.RESET_ALL}\n")
 
 run_program()
