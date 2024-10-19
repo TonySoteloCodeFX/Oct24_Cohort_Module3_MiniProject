@@ -85,9 +85,9 @@ def search_contact():
 def display_contacts():
     for index, (contact_num, contact_details) in enumerate(contact_dict.items()):
         for item in contact_num:
-            print(f"{index} - Title: {contact_details['Title']}")
-            print(f"Name: {contact_details['Name']}\nPhone Number: {contact_num}")
-            print(f"Email: {contact_details['Email']}\nNotes: {contact_details['Notes']}")
+            print(f"{Fore.GREEN}{index} - Title:{Style.RESET_ALL} {contact_details['Title']}")
+            print(f"{Fore.GREEN}Name:{Style.RESET_ALL} {contact_details['Name']}\n{Fore.GREEN}Phone Number:{Style.RESET_ALL} {contact_num}")
+            print(f"{Fore.GREEN}Email:{Style.RESET_ALL} {contact_details['Email']}\n{Fore.GREEN}Notes:{Style.RESET_ALL} {contact_details['Notes']}")
 
 def export_contacts():
     pass
