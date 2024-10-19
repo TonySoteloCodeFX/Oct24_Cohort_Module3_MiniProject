@@ -83,7 +83,11 @@ def search_contact():
     pass
 
 def display_contacts():
-    pass
+    for index, (contact_num, contact_details) in enumerate(contact_dict.items()):
+        for item in contact_num:
+            print(f"{index} - Title: {contact_details['Title']}")
+            print(f"Name: {contact_details['Name']}\nPhone Number: {contact_num}")
+            print(f"Email: {contact_details['Email']}\nNotes: {contact_details['Notes']}")
 
 def export_contacts():
     pass
