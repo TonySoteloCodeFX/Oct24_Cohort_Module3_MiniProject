@@ -19,32 +19,60 @@ def add_contact():
     keep_running = True
     while keep_running:
         try:
-            print("To add a new contact enter the following:")
+            print(f"{Fore.GREEN}To add a new contact enter the following:{Style.RESET_ALL}")
+            print("-" * 50)
 
-            contact_number = input("Enter phone number: ex: xxx-xxx-xxxx\n")
+            contact_number = input(f"{Fore.GREEN}Enter phone number: ex: xxx-xxx-xxxx{Style.RESET_ALL}\n")
+            print("-" * 50)
             if not re.match(name_pattern, contact_number):
-                print("Invalid Number. Try again. ex: xxx-xxx-xxxx")
+                clr()
+                print("-" * 50)
+                print(f"{Fore.RED}Invalid Number.{Style.RESET_ALL} Try again. ex: xxx-xxx-xxxx")
+                print("-" * 50)
                 continue
 
-            contact_name = input("Enter full name: ex: John Doe\n")
+            contact_name = input(f"{Fore.GREEN}Enter full name: ex: John Doe{Style.RESET_ALL}\n")
+            print("-" * 50)
             if not re.match(name_pattern, contact_name):
-                print("Invalid Name. Try again. ex: John Doe")
+                clr()
+                print("-" * 50)
+                print(f"{Fore.RED}Invalid Name.{Style.RESET_ALL} Try again. ex: John Doe")
+                print("-" * 50)
                 continue
 
-            contact_email = input("Enter email: ex: john_doe@gmail.com\n")
+            contact_email = input(f"{Fore.GREEN}Enter email: ex: john_doe@gmail.com{Style.RESET_ALL}\n")
+            print("-" * 50)
             if not re.match(email_pattern, contact_email):
-                print("Invalid Email. Try again. ex: john_doe@gmail.com")
+                clr()
+                print("-" * 50)
+                print(f"{Fore.RED}Invalid Email.{Style.RESET_ALL} Try again. ex: john_doe@gmail.com")
+                print("-" * 50)
                 continue
 
-            contact_notes = input("Enter Notes:\n")
+            contact_title = input(f"{Fore.GREEN}Personal or Professional:{Style.RESET_ALL}\n")
+            print("-" * 50)
+            contact_notes = input(f"{Fore.GREEN}Enter Notes:{Style.RESET_ALL}\n")
+
+            contact_dict[contact_number] = {
+                "Name": contact_name,
+                "Title": contact_title,
+                "Email": contact_email,
+                "Notes": contact_notes
+            }
+
+            clr()
+            print("-" * 50)
+            print(f"{Fore.GREEN}The following contact was added.{Style.RESET_ALL}")
+            print("-" * 50)
+            print(f"{Fore.GREEN}Title:{Style.RESET_ALL} {contact_title}\n{Fore.GREEN}Name:{Style.RESET_ALL} {contact_name}\n{Fore.GREEN}Phone Number:{Style.RESET_ALL} {contact_number}\n{Fore.GREEN}Email:{Style.RESET_ALL} {contact_email}\n{Fore.GREEN}Notes:{Style.RESET_ALL} {contact_notes}")
+            print("-" * 50)
 
             keep_running = False
         except Exception as e:
             clr()
             print("-" * 50)
-            print(f"Error: {e}")
+            print(f"{Fore.RED}Error:{Style.RESET_ALL} {e}")
             
-
 def edit_contact():
     pass
 
