@@ -5,7 +5,7 @@ from art import intro, outro
 
 contact_dict = {}
 
-number_pattern = r"[\d]{3}-[\d]{3}-[\d]{4}"
+number_pattern = r"^\d{3}-\d{3}-\d{4}$"
 name_pattern = r"([\bA-Z]{1}[A-Za-z.']+)\s([A-Z]{1}[A-Za-z]+)"
 email_pattern = r"[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[a-z]{3,}"
 
@@ -24,7 +24,7 @@ def add_contact():
 
             contact_number = input(f"{Fore.GREEN}Enter phone number: ex: xxx-xxx-xxxx{Style.RESET_ALL}\n")
             print("-" * 50)
-            if not re.match(name_pattern, contact_number):
+            if not re.match(number_pattern, contact_number):
                 clr()
                 print("-" * 50)
                 print(f"{Fore.RED}Invalid Number.{Style.RESET_ALL} Try again. ex: xxx-xxx-xxxx")
@@ -84,10 +84,12 @@ def search_contact():
 
 def display_contacts():
     for index, (contact_num, contact_details) in enumerate(contact_dict.items()):
-        for item in contact_num:
-            print(f"{Fore.GREEN}{index} - Title:{Style.RESET_ALL} {contact_details['Title']}")
-            print(f"{Fore.GREEN}Name:{Style.RESET_ALL} {contact_details['Name']}\n{Fore.GREEN}Phone Number:{Style.RESET_ALL} {contact_num}")
-            print(f"{Fore.GREEN}Email:{Style.RESET_ALL} {contact_details['Email']}\n{Fore.GREEN}Notes:{Style.RESET_ALL} {contact_details['Notes']}")
+        print(f"{Fore.GREEN}{index + 1} - Title:{Style.RESET_ALL} {contact_details['Title']}")
+        print(f"{Fore.GREEN}Name:{Style.RESET_ALL} {contact_details['Name']}")
+        print(f"{Fore.GREEN}Phone Number:{Style.RESET_ALL} {contact_num}")
+        print(f"{Fore.GREEN}Email:{Style.RESET_ALL} {contact_details['Email']}")
+        print(f"{Fore.GREEN}Notes:{Style.RESET_ALL} {contact_details['Notes']}")
+        print("-" * 50)
 
 def export_contacts():
     pass
