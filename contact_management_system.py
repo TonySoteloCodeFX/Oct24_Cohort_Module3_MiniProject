@@ -3,12 +3,47 @@ import re
 from colorama import Fore, Back, Style
 from art import intro, outro
 
+contact_dict = {}
+
+number_pattern = r"[\d]{3}-[\d]{3}-[\d]{4}"
+name_pattern = r"([\bA-Z]{1}[A-Za-z.']+)\s([A-Z]{1}[A-Za-z]+)"
+email_pattern = r"[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[a-z]{3,}"
+
 def clr():
     '''This clears the terminal.'''
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def add_contact():
-    pass
+    clr()
+    print("-" * 50)
+    keep_running = True
+    while keep_running:
+        try:
+            print("To add a new contact enter the following:")
+
+            contact_number = input("Enter phone number: ex: xxx-xxx-xxxx\n")
+            if not re.match(name_pattern, contact_number):
+                print("Invalid Number. Try again. ex: xxx-xxx-xxxx")
+                continue
+
+            contact_name = input("Enter full name: ex: John Doe\n")
+            if not re.match(name_pattern, contact_name):
+                print("Invalid Name. Try again. ex: John Doe")
+                continue
+
+            contact_email = input("Enter email: ex: john_doe@gmail.com\n")
+            if not re.match(email_pattern, contact_email):
+                print("Invalid Email. Try again. ex: john_doe@gmail.com")
+                continue
+
+            contact_notes = input("Enter Notes:\n")
+
+            keep_running = False
+        except Exception as e:
+            clr()
+            print("-" * 50)
+            print(f"Error: {e}")
+            
 
 def edit_contact():
     pass
