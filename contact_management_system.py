@@ -80,9 +80,33 @@ def delete_contact():
     pass
 
 def search_contact():
-    pass
+    try:
+        clr()
+        print("-" * 50)
+        print(f"{Fore.GREEN}Enter number to search for ex: xxx-xxx-xxxx{Style.RESET_ALL}")
+        contact_search = input(f"{Fore.GREEN}Enter Number:{Style.RESET_ALL} ")
+        
+        if contact_search in contact_dict:
+            clr()
+            print("-" * 50)
+            contact_details = contact_dict[contact_search]
+            print(f"{Fore.GREEN}Title:{Style.RESET_ALL} {contact_details['Title']}")
+            print(f"{Fore.GREEN}Name:{Style.RESET_ALL} {contact_details['Name']}")
+            print(f"{Fore.GREEN}Phone Number: {Style.RESET_ALL}{contact_search}")
+            print(f"{Fore.GREEN}Email:{Style.RESET_ALL} {contact_details['Email']}")
+            print(f"{Fore.GREEN}Notes:{Style.RESET_ALL} {contact_details['Notes']}")
+            print("-" * 50)
+        else:
+            print("-" * 50)
+            print(f"The number: {contact_search}. Does not exist. Try again.")
+
+    except ValueError:
+        print("-" * 50)
+        print("Error: Incorrect input")
 
 def display_contacts():
+    clr()
+    print("-" * 50)
     for index, (contact_num, contact_details) in enumerate(contact_dict.items()):
         print(f"{Fore.GREEN}{index + 1} - Title:{Style.RESET_ALL} {contact_details['Title']}")
         print(f"{Fore.GREEN}Name:{Style.RESET_ALL} {contact_details['Name']}")
