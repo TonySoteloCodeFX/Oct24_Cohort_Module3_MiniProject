@@ -77,7 +77,33 @@ def edit_contact():
     pass
 
 def delete_contact():
-    pass
+    try:
+        clr()
+        print("-" * 50)
+        print(f"{Fore.GREEN}Enter number to delete for ex: xxx-xxx-xxxx{Style.RESET_ALL}")
+        contact_delete = input(f"{Fore.GREEN}Enter Number:{Style.RESET_ALL} ")
+
+        if contact_delete in contact_dict:
+            clr()
+            print("-" * 50)
+            contact_details = contact_dict[contact_delete]
+            print(f"{Fore.GREEN}The following contact has been deleted.{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}Title:{Style.RESET_ALL} {contact_details['Title']}")
+            print(f"{Fore.GREEN}Name:{Style.RESET_ALL} {contact_details['Name']}")
+            print(f"{Fore.GREEN}Phone Number: {Style.RESET_ALL}{contact_delete}")
+            print(f"{Fore.GREEN}Email:{Style.RESET_ALL} {contact_details['Email']}")
+            print(f"{Fore.GREEN}Notes:{Style.RESET_ALL} {contact_details['Notes']}")
+            del contact_dict[contact_delete]
+            print("-" * 50)
+        else:
+            clr()
+            print("-" * 50)
+            print(f"{Fore.GREEN}The number:{Style.RESET_ALL} {contact_delete}. {Fore.GREEN}Does not exist. Try again.{Style.RESET_ALL}")
+
+    except ValueError:
+        clr()
+        print("-" * 50)
+        print(f"{Fore.RED}Error:{Style.RESET_ALL} Incorrect input")
 
 def search_contact():
     try:
@@ -97,12 +123,14 @@ def search_contact():
             print(f"{Fore.GREEN}Notes:{Style.RESET_ALL} {contact_details['Notes']}")
             print("-" * 50)
         else:
+            clr()
             print("-" * 50)
-            print(f"The number: {contact_search}. Does not exist. Try again.")
+            print(f"{Fore.GREEN}The number:{Style.RESET_ALL} {contact_search}. {Fore.GREEN}Does not exist. Try again.{Style.RESET_ALL}")
 
     except ValueError:
+        clr()
         print("-" * 50)
-        print("Error: Incorrect input")
+        print(f"{Fore.RED}Error:{Style.RESET_ALL} Incorrect input")
 
 def display_contacts():
     clr()
