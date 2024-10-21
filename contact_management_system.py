@@ -14,6 +14,7 @@ def clr():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def add_contact():
+    '''Adds contact to contact dictionary & returns confirmation.'''
     clr()
     print("-" * 50)
     keep_running = True
@@ -74,9 +75,74 @@ def add_contact():
             print(f"{Fore.RED}Error:{Style.RESET_ALL} {e}")
             
 def edit_contact():
-    pass
+    '''deletes given contact and creates a new one.'''
+    clr()
+    print("-" * 50)
+    keep_running = True
+    while keep_running:
+        try:
+            print(f"{Fore.GREEN}Enter number to edit for ex: xxx-xxx-xxxx{Style.RESET_ALL}")
+            contact_edit = input(f"{Fore.GREEN}Enter Number:{Style.RESET_ALL} ")
+            print("-" * 50)
+
+            if contact_edit in contact_dict:
+                clr()
+                print("-" * 50)
+                del contact_dict[contact_edit]
+
+            correct_number = input(f"{Fore.GREEN}Enter correct phone number: ex: xxx-xxx-xxxx{Style.RESET_ALL}\n")
+            print("-" * 50)
+            if not re.match(number_pattern, correct_number):
+                clr()
+                print("-" * 50)
+                print(f"{Fore.RED}Invalid Number.{Style.RESET_ALL} Try again. ex: xxx-xxx-xxxx")
+                print("-" * 50)
+                continue
+
+            correct_name = input(f"{Fore.GREEN}Enter correct full name: ex: John Doe{Style.RESET_ALL}\n")
+            print("-" * 50)
+            if not re.match(name_pattern, correct_name):
+                clr()
+                print("-" * 50)
+                print(f"{Fore.RED}Invalid Name.{Style.RESET_ALL} Try again. ex: John Doe")
+                print("-" * 50)
+                continue
+
+            correct_email = input(f"{Fore.GREEN}Enter correct email: ex: john_doe@gmail.com{Style.RESET_ALL}\n")
+            print("-" * 50)
+            if not re.match(email_pattern, correct_email):
+                clr()
+                print("-" * 50)
+                print(f"{Fore.RED}Invalid Email.{Style.RESET_ALL} Try again. ex: john_doe@gmail.com")
+                print("-" * 50)
+                continue
+
+            correct_title = input(f"{Fore.GREEN}Personal or Professional:{Style.RESET_ALL}\n")
+            print("-" * 50)
+            correct_notes = input(f"{Fore.GREEN}Enter Notes:{Style.RESET_ALL}\n")
+
+            contact_dict[correct_number] = {
+                "Name": correct_name,
+                "Title": correct_title,
+                "Email":correct_email,
+                "Notes": correct_notes
+            }
+
+            clr()
+            print("-" * 50)
+            print(f"{Fore.GREEN}The following contact was edited.{Style.RESET_ALL}")
+            print("-" * 50)
+            print(f"{Fore.GREEN}Title:{Style.RESET_ALL} {correct_title}\n{Fore.GREEN}Name:{Style.RESET_ALL} {correct_name}\n{Fore.GREEN}Phone Number:{Style.RESET_ALL}{correct_number}\n{Fore.GREEN}Email:{Style.RESET_ALL} {correct_email}\n{Fore.GREEN}Notes:{Style.RESET_ALL} {correct_notes}")
+            print("-" * 50)
+
+            keep_running = False
+        except Exception as e:
+            clr()
+            print("-" * 50)
+            print(f"{Fore.RED}Error:{Style.RESET_ALL} {e}")
 
 def delete_contact():
+    '''Deletes given number contact from contact dictionary and prints confirmation.'''
     try:
         clr()
         print("-" * 50)
@@ -106,6 +172,7 @@ def delete_contact():
         print(f"{Fore.RED}Error:{Style.RESET_ALL} Incorrect input")
 
 def search_contact():
+    '''Searches contact dictionary and returns given number's contact details.'''
     try:
         clr()
         print("-" * 50)
@@ -133,6 +200,7 @@ def search_contact():
         print(f"{Fore.RED}Error:{Style.RESET_ALL} Incorrect input")
 
 def display_contacts():
+    '''Displays all contacts in dictionary.'''
     clr()
     print("-" * 50)
     for index, (contact_num, contact_details) in enumerate(contact_dict.items()):
@@ -144,7 +212,12 @@ def display_contacts():
         print("-" * 50)
 
 def export_contacts():
-    pass
+    with open('contact_file.txt', 'w') as file:
+        for contact, details in contact_dict.items():
+            file.write(f"{contact}: Name: {details.get('Name', 'N/A')},"
+                       f"Phone Number: {details.get('Phone Number', 'N/A')},"
+                       f"Email: {details.get('Email', 'N/A')},"
+                       f"Notes: {details.get('Notes', 'N/A')}\n")
 
 def import_contacts():
     pass
